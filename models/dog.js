@@ -17,5 +17,5 @@ const dogSchema = new mongoose.Schema({
     }
 })
 //created and define model
-const Dog = mongoose.model('Dog',dogSchema)
-module.exports = Dog
+const Dog = mongoose.model('Dog',dogSchema);
+module.exports = Dog;

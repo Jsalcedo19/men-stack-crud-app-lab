@@ -20,6 +20,9 @@ app.get("/", async (req, res) => {
     res.render("index.ejs");
 })
 
+app.get("/dogs/new", (req, res) => {
+    res.render("dogs/new.ejs");
+});
 
 app.listen(3000, () => {
     console.log("listening on port localhost:3000")
