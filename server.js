@@ -30,13 +30,18 @@ app.get("/dogs/new", (req, res) => {
 });
 
 
-// POST routes 
+// POST routes for creating a new dog
 app.post("/dogs", async (req, res) => {
     console.log(req.body);
     await Dog.create(req.body);
     res.redirect("/Dogs/new");
   });
-  
+ 
+// GET route displays all dogs in the collection
+app.get("/dogs", async (req, res) => {
+    const allDogs = await Dog.find();
+    res.render("dogs/index.ejs",{dogs:allDogs});
+});
 
 app.listen(3000, () => {
     console.log("listening on port localhost:3000")
