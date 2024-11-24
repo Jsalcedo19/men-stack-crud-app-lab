@@ -15,14 +15,28 @@ mongoose.connection.on("connected", () => {
   //import Dog model
   const Dog = require('./models/dog.js');
 
-//routes 
+//middleware
+//allows additiona functionality
+  app.use(express.urlencoded({ extended: false }));
+
+
+//GET routes homePage
 app.get("/", async (req, res) => {
     res.render("index.ejs");
 })
-
+ //GET route displays for to create a new dog
 app.get("/dogs/new", (req, res) => {
     res.render("dogs/new.ejs");
 });
+
+
+// POST routes 
+app.post("/dogs", async (req, res) => {
+    console.log(req.body);
+    await Dog.create(req.body);
+    res.redirect("/Dogs/new");
+  });
+  
 
 app.listen(3000, () => {
     console.log("listening on port localhost:3000")
