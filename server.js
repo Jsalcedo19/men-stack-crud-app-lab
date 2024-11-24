@@ -11,6 +11,10 @@ mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on("connected", () => {
     console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
   });
+
+  //import Dog model
+  const Dog = require('./models/dog.js');
+
 //routes 
 app.get("/", async (req, res) => {
     res.render("index.ejs");

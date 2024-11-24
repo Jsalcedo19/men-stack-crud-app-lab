@@ -16,6 +16,6 @@ const dogSchema = new mongoose.Schema({
         required: true
     }
 })
-
+//created and define model
 const Dog = mongoose.model('Dog',dogSchema)
 module.exports = Dog
