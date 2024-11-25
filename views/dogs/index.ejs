@@ -12,8 +12,20 @@
     <a href="/dogs/new">Add New Dog</a>
     <ul>
         <% dogs.forEach(dog => { %>
-            <a href="/dogs/<%= dog._id %>"> <%= dog.name %> </a>
-        </li>
+            <li>
+                <strong>Name:</strong> <%= dog.name %> <br>
+                <strong>Breed:</strong> <%= dog.breed %> <br>
+                <strong>Age:</strong> <%= dog.age %> <br>
+           
+                <form action="/dogs/<%= dog._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete <% dog.name %></button>
+                </form>
+                <form action="/dogs/<%= dog._id %>/edit" method="GET">
+                    <button type="submit">Edit <% dog.name %></button>
+                    </form>
+        
+            </li>
+            <hr>
         <% }); %>
       </ul>
   </body>

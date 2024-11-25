@@ -1,0 +1,19 @@
+<body>
+    <!-- update the header -->
+    <h1>Edit <%= dog.name %></h1>
+    <form action="/dogs/<%=dog._id%>?_method=PUT" method="POST"></form>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= dog.name %>" required>
+        
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed" value="<%= dog.breed %>" required>
+        
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" value="<%= dog.age %>" required>
+      <!-- update the button text -->
+      <button type="submit">Update Dog</button>
+    </form>
+    
+  </body>
+  

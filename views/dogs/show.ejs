@@ -9,10 +9,14 @@
     <h1><%= dog.name %></h1> <!-- Display dog name -->
     <!-- Add more details about the dog here -->
     <a href="/dogs/">Back to Dogs</a>
+    <p>Breed: <%= dog.name %></p>
     <p>Breed: <%= dog.breed %></p>
     <p>Age: <%= dog.age %></p>
+    <!-- new delete button -->
     <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">
         <button type="submit">Delete <%= dog.name %></button>
-
+<!-- add edit page link here -->
+<a href="/dogs/<%= dog._id %>/edit">Edit <%= dog.name %></a>
+<a href="/dogs">Back to Dogs</a>
   </body>
 </html>
