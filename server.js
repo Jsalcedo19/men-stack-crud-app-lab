@@ -61,44 +61,23 @@ app.get("/dogs/:dogId", async(req, res) => {
     res.redirect("/dogs");
   });
 
-  app.get("/dogs/:dogId/edit", async (req, res) => {
+ //GET route displays the edit form for a dog by id
+ app.get("/dogs/:dogId/edit", async (req, res) => {
     const foundDog = await Dog.findById(req.params.dogId);
     res.render("dogs/edit.ejs", {
         dog:foundDog,
     });
   });
-  
+
+  //PUT route updates dog by id
   app.put("/dogs/:dogId", async (req, res) => {
-    // Validate input data
-    const { name, breed, age } = req.body;
-    if (!name && !breed && !age) {
-      return res.status(400).send("No valid fields provided for update.");
-    }
-  
-    // Extract only the fields that should be updated
-    const updateFields = {};
-    if (name) updateFields.name = name;
-    if (breed) updateFields.breed = breed;
-    if (age) updateFields.age = age;
-  
-    // Update the dog in the database
-    const updatedDog = await Dog.findByIdAndUpdate(
-      req.params.dogId,
-      { $set: updateFields }, // Use $set to ensure only specific fields are updated
-      { new: true, runValidators: true } // Ensures the returned document is the updated one and runs validators
+    await Dog.findByIdAndUpdate(
+        req.params.dogId,
+        req.body,
+        { new: true }
     );
-  
-    if (updatedDog) {
-      // Send a response to indicate successful update
-      res.send("Dog updated successfully");
-    } else {
-      // Handle case where the dog is not found
-      res.status(404).send("Dog not found");
-    }
-  });
-  
-  
-  
+    res.redirect("/dogs");
+});
   
 
 app.listen(3000, () => {
