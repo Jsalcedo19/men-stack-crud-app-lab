@@ -11,7 +11,8 @@
     <a href="/dogs/">Back to Dogs</a>
     <p>Breed: <%= dog.breed %></p>
     <p>Age: <%= dog.age %></p>
-    
+    <form action="/dogs/<%=dog._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete <%= dog.name %></button>
 
   </body>
 </html>
