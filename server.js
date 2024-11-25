@@ -3,9 +3,12 @@ const dotenv = require('dotenv');
 dotenv.config(); // loads the environment variables from .env files
 const express = require('express');
 const mongoose = require ('mongoose');
+const methodOverride = require("method-override");
+const morgan = require("morgan"); 
 
+//loads express
+const app = express(); 
 
-const app = express(); //loads express
 //connects to mongoDB using the connection string in .env
 mongoose.connect(process.env.MONGODB_URI); 
 mongoose.connection.on("connected", () => {
@@ -18,7 +21,8 @@ mongoose.connection.on("connected", () => {
 //middleware
 //allows additiona functionality
   app.use(express.urlencoded({ extended: false }));
-
+  app.use(methodOverride("_method"));
+  app.use(morgan("dev")); 
 
 //GET routes homePage
 app.get("/", async (req, res) => {
@@ -42,7 +46,7 @@ app.get("/dogs", async (req, res) => {
     const allDogs = await Dog.find();
     res.render("dogs/index.ejs",{dogs:allDogs});
 });
-
+// GET route displays the dog by id and its properties are displayed
 app.get("/dogs/:dogId", async(req, res) => {
     const foundDog = await Dog.findById(req.params.dogId);
     res.render("dogs/show.ejs", {dog: foundDog});
