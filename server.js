@@ -43,6 +43,12 @@ app.get("/dogs", async (req, res) => {
     res.render("dogs/index.ejs",{dogs:allDogs});
 });
 
+app.get("/dogs/:dogId", async(req, res) => {
+    const foundDog = await Dog.findById(req.params.dogId);
+    res.render("dogs/show.ejs", {dog: foundDog});
+  });
+  
+
 app.listen(3000, () => {
     console.log("listening on port localhost:3000")
 });
